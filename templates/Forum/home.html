@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-xl shadow-2xl p-8 md:p-12 mb-12 text-center overflow-hidden">
+        <!-- Background Decorative Element -->
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23FFFFFF" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30v-4h-2v4h-4v2h4v4h2v-4h4V4h-4z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-fade-in">Bem-vindo ao Diário de Missão!</h1>
+        <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">Junte-se à nossa comunidade vibrante, explore histórias inspiradoras e compartilhe sua missão!</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{% url 'publications' %}" class="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full hover:bg-blue-100 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                Explorar Publicações
+            </a>
+            <a href="#get-involved" class="inline-block bg-yellow-400 text-gray-800 font-semibold py-3 px-6 rounded-full hover:bg-yellow-300 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                Participe Agora
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Posts Preview -->
+    {% if posts %}
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">Histórias Recentes</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for post in posts|slice:":3" %}
+                <a href="{% url 'post_detail' post.id %}" class="block bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-4">
+                        {% if post.featured_image %}
+                            <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="w-full h-48 object-cover rounded-t-xl mb-4">
+                        {% else %}
+                            <div class="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 rounded-t-xl mb-4 flex items-center justify-center">
+                                <span class="text-gray-500 font-medium">Sem imagem</span>
+                            </div>
+                        {% endif %}
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ post.title }}</h3>
+                        <p class="text-sm text-gray-600">Por {{ post.author.get_full_name|default:post.author.username }} em {{ post.created_at|date:"d/m/Y" }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-8">
+            <a href="{% url 'publications' %}" class="text-blue-600 hover:text-blue-800 font-semibold text-lg transition-colors duration-300">Ver Todas as Histórias</a>
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600 text-lg">Nenhuma história disponível no momento. Volte em breve!</p>
+    {% endif %}
+
+    <!-- About the Project -->
+    <div class="my-12 bg-gray-50 rounded-xl p-8 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Sobre o Diário de Missão</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mb-6">O Diário de Missão é uma plataforma dedicada a compartilhar histórias de impacto, fé e transformação. Nosso objetivo é conectar pessoas, inspirar ações e construir uma comunidade que celebra missões significativas.</p>
+        <a href="#get-involved" class="inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg">Saiba Mais</a>
+    </div>
+
+    <!-- Get Involved Section -->
+    <div id="get-involved" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-800 rounded-xl shadow-lg p-8 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Faça Parte da Nossa Missão!</h2>
+        <p class="text-lg max-w-2xl mx-auto mb-6">Quer contribuir com sua história ou apoiar nosso projeto? Junte-se à comunidade e ajude a espalhar inspiração!</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{% url 'publications' %}" class="inline-block bg-white text-gray-800 font-semibold py-3 px-6 rounded-full hover:bg-gray-100 transition-all duration-300 shadow-md hover:shadow-lg">Compartilhar uma História</a>
+            <a href="mailto:contato@diariodemissao.com" class="inline-block bg-gray-800 text-white font-semibold py-3 px-6 rounded-full hover:bg-gray-900 transition-all duration-300 shadow-md hover:shadow-lg">Entrar em Contato</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<style>
+/* Custom animation for hero section */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+</style>

@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block title %}Publicações{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Publicações do Fórum</h1>
+    
+    {% if posts %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for post in posts %}
+                <a href="{% url 'post_detail' post.id %}" class="block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div class="p-4">
+                        {% if post.featured_image %}
+                            <img src="{{ post.featured_image.url }}" alt="Imagem de destaque de {{ post.title }}" class="w-full h-48 object-cover rounded-t-lg mb-4">
+                        {% else %}
+                            <div class="w-full h-48 bg-gray-200 rounded-t-lg mb-4 flex items-center justify-center">
+                                <span class="text-gray-500">Sem imagem</span>
+                            </div>
+                        {% endif %}
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">{{ post.title }}</h2>
+                        <p class="text-sm text-gray-600">Por {{ post.author }} em {{ post.created_at|date:"d/m/Y H:i" }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600 text-lg">Nenhum post encontrado.</p>
+    {% endif %}
+</div>
+{% endblock %}

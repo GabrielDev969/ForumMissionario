@@ -1,0 +1,39 @@
+<footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-8 mt-auto">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8 text-center">
+            <!-- Brand and Copyright -->
+            <div class="flex flex-col items-center md:items-start">
+                <a href="{% url 'home' %}" class="flex items-center space-x-2 text-xl font-bold tracking-tight mb-2 hover:text-blue-400 transition-colors duration-300">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Diário de Missão</span>
+                </a>
+                <p class="text-sm">© {% now "Y" %} Diário de Missão. Todos os direitos reservados.</p>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-lg font-semibold mb-3">Assine nossa Newsletter</h3>
+                <form class="flex flex-col sm:flex-row items-center gap-2">
+                    <input type="email" placeholder="Digite seu e-mail" class="w-64 bg-gray-700 text-white rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300" aria-label="Email for newsletter">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 py-2 transition-colors duration-300">Inscrever-se</button>
+                </form>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-lg font-semibold mb-3">Siga-nos!</h3>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-white hover:text-blue-400 transform hover:scale-125 transition-all duration-300" aria-label="Instagram">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-400 transform hover:scale-125 transition-all duration-300" aria-label="YouTube">
+                        <i class="fab fa-youtube fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-400 transform hover:scale-125 transition-all duration-300" aria-label="Facebook">
+                        <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
