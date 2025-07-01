@@ -9,8 +9,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-XSRF_TRUSTED_ORIGINS = ['']
+ALLOWED_HOSTS = ['https://juntademissoes.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://juntademissoes.up.railway.app']
 
 
 # Application definition
